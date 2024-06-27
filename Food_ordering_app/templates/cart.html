@@ -1,0 +1,69 @@
+{% extends "index.html" %}
+
+{% block start %}
+
+<main>
+    {% for message in messages %}
+        <p class="messages">{{message}}</p>  
+    {% endfor %} 
+
+    <h1 class="box-heading">Your Cart</h1>
+    <div class="cart-container">
+        <h3>Items in Your Cart</h3>
+        {% if cart_items %}
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Pizza</th>
+                    <th>Toppings</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                    <th>Actions</th>                   
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.menuitem.pizza_name }}</td>
+                    <td>
+                        <form action="{% url 'Food_ordering_app:update_cart_item' item.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                            <button type="submit" class="btn btn-warning">Update cart</button>
+                        </form>
+                        <div class="toppings-list">
+                            {% if item.toppings.all %}
+                                {% for topping in item.toppings.all %}
+                                    <span class="topping">{{ topping.name }} (<i class="fa-solid fa-indian-rupee-sign"></i> {{ topping.price }})</span>
+                                {% endfor %}
+                            {% else %}
+                                No toppings
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>
+                        <p>{{ item.quantity}}</p>
+                    </td>
+                    <td><i class="fa-solid fa-indian-rupee-sign"></i> {{ item.menuitem.price }}</td>
+                    <td><i class="fa-solid fa-indian-rupee-sign"></i> {{ item.total_price }}</td>
+                    <td>
+                        <a href="{% url 'Food_ordering_app:remove_cart_item' item.id %}" class="remove-link"><i class="fa-solid fa-trash-can" style="color: black;"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="cart-summary">
+            <p>Total: <i class="fa-solid fa-indian-rupee-sign"></i> {{ cart_total }}</p>                
+            <a href="{% url 'Food_ordering_app:checkout' %}" class="btn btn-danger">Proceed to Checkout</a>
+        </div>
+        {% else %}
+            <p>Your cart is empty.</p>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock %}

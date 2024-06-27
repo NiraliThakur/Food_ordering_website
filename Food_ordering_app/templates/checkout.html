@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+
+
+{% block start %}
+
+<main>
+    
+    <h1 class="box-heading">Checkout</h1>
+    <div class="checkout-container">
+        <h2 class="heading-h2">Order Summary</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Pizza</th>
+                    <th>Toppings</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.menuitem.pizza_name }}</td>
+                    <td>
+                        <div class="toppings-list">
+                            {% if item.toppings.all %}
+                                {% for topping in item.toppings.all %}
+                                    <span class="topping">{{ topping.name }} (<i class="fa-solid fa-indian-rupee-sign"></i> {{ topping.price }})</span>
+                                {% endfor %}
+                            {% else %}
+                                No toppings
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>
+                        <p>{{ item.quantity}}</p>
+                    </td>
+                    <td><i class="fa-solid fa-indian-rupee-sign"></i> {{ item.menuitem.price }}</td>    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="order-total">
+            <p><strong>Total: <i class="fa-solid fa-indian-rupee-sign"></i> {{ total_price }}</strong></p>
+        </div>
+        <form action="{% url 'Food_ordering_app:checkout' %}" method="POST">
+        {% csrf_token %}
+        <form method="POST">
+            {% csrf_token %}
+            <h2 class="heading-h2">Shipping Information</h2>
+            {{ shipping_form.as_p }}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">Place Order</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}
+
+

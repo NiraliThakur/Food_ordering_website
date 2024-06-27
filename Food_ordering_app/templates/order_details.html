@@ -1,0 +1,69 @@
+{% extends "index.html" %}
+
+{% block start %}
+    
+    <div class="order-details-container">
+
+        {% for message in messages %}
+            <p class="messages">{{message}}</p>  
+        {% endfor %} 
+
+        <div class="box-heading">
+            <h1>Order Detail</h1>
+        </div>
+        <div class="order-info">
+            <h2>Order Information</h2>
+            <table>
+                <tr>
+                    <th>Order ID</th>
+                    <td>{{ order.id }}</td>
+                </tr>
+                <tr>                
+                    <th>User</th>
+                    <td>{{ order.user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Order Date</th>
+                    <td>{{ order.time }}</td>
+                </tr>
+                
+            </table>
+        </div>
+        <div class="order-items">
+            <h2>Order Items</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pizza</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Toppings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order_items %}
+                    <tr>
+                        <td>{{ item.menuitem.pizza_name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td><i class="fa-solid fa-indian-rupee-sign"></i> {{ item.price }}</td>
+                        <td>
+                            {% if item.toppings.all %}
+                                {% for topping in item.toppings.all %}
+                                    {{ topping.name }} ( <i class="fa-solid fa-indian-rupee-sign"></i> {{topping.price}} ){% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                None
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="total">
+            <strong>Total Price: <i class="fa-solid fa-indian-rupee-sign"></i> {{ order.total_price }}</strong>
+        </div>
+        <a href="{% url 'Food_ordering_app:index' %}" class="btn btn-success">Back to home</a>
+    </div>
+
+{% endblock %}

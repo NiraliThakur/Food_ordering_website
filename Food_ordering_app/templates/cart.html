@@ -2,7 +2,7 @@
 
 {% block start %}
 
-<main>
+<main class="cart-box">
     {% for message in messages %}
         <p class="messages">{{message}}</p>  
     {% endfor %} 
@@ -31,16 +31,12 @@
                         <form action="{% url 'Food_ordering_app:update_cart_item' item.id %}" method="post" style="display:inline;">
                             {% csrf_token %}
                             <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
-                            <button type="submit" class="btn btn-warning">Update cart</button>
+                            <button type="submit" class="btn btn-warning">update</button>
                         </form>
                         <div class="toppings-list">
-                            {% if item.toppings.all %}
                                 {% for topping in item.toppings.all %}
                                     <span class="topping">{{ topping.name }} (<i class="fa-solid fa-indian-rupee-sign"></i> {{ topping.price }})</span>
                                 {% endfor %}
-                            {% else %}
-                                No toppings
-                            {% endif %}
                         </div>
                     </td>
                     <td>

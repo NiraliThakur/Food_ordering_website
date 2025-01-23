@@ -3,7 +3,6 @@
 {% block start %}
     
     <div class="order-details-container">
-
         {% for message in messages %}
             <p class="messages">{{message}}</p>  
         {% endfor %} 
@@ -12,7 +11,7 @@
             <h1>Order Detail</h1>
         </div>
         <div class="order-info">
-            <h2>Order Information</h2>
+            <h2 class="heading-h2">Order Information</h2>
             <table>
                 <tr>
                     <th>Order ID</th>
@@ -26,11 +25,15 @@
                     <th>Order Date</th>
                     <td>{{ order.time }}</td>
                 </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ order.address }}</td>
+                </tr>
                 
             </table>
         </div>
         <div class="order-items">
-            <h2>Order Items</h2>
+            <h2 class="heading-h2">Order Items</h2>
             <table>
                 <thead>
                     <tr>

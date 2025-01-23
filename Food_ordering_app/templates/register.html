@@ -2,42 +2,43 @@
 
 {% block start %}
 
-<div class="register-container">
-    <div class="row" style="width: 25rem;">
-
+    <div class="register-container">
         {% for message in messages %}
         <p class="messages">{{message}}</p>  
         {% endfor %} 
-<div style="text-align: center;">
-        <h2>Create an account</h2>
-    </div>
-    <hr>
-        <form action="." enctype="multipart/form-data" method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">User name</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" name="username" placeholder="username">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" name="email" placeholder="email address">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleFormControlInput1" name="password1" placeholder="password">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Confirm password</label>
-                <input type="password" class="form-control" id="exampleFormControlInput1" name="password2" placeholder="Confirm password">
-            </div>
-            <div class="form-actions">
-                <input type="submit"  class="btn btn-primary"  name="submit">
-                <hr>
-                <p class="account">Already have an account?</p>           
-                <a href="{% url 'accounts:login' %}" class="btn btn-primary">sign in</a>
-            </div>     
-        </form> 
-    </div>
-</div>  
 
-{% endblock %}
+        <div class="register-heading">
+            <h2>Create new account</h2>
+        </div>
+        <hr>
+
+        <div class="register-box">
+            <form action="." enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">User name</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="username" placeholder="username">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" name="email" placeholder="email address">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleFormControlInput1" name="password1" placeholder="password">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Confirm password</label>
+                    <input type="password" class="form-control" id="exampleFormControlInput1" name="password2" placeholder="Confirm password">
+                </div>
+                <div class="form-actions">
+                    <input type="submit"  class="btn btn-primary"  name="submit">
+                    <hr>
+                    <p class="account">Already have an account?</p>           
+                    <a href="{% url 'accounts:login' %}" class="btn btn-primary">sign in</a>
+                </div>     
+            </form> 
+        </div>
+    </div>  
+
+    {% endblock %}

@@ -1,35 +1,39 @@
 {% extends "index.html" %}
 
-
 {% block start %}
 
-<main>
-    
-    <h1 class="box-heading">Add Pizza to Cart</h1>
-    
-    <form method="post" id="add-to-cart-form">
-        {% csrf_token %}
-        <div class="quantity-select">
-            <label for="quantity"><b>Quantity:</b></label>
-            <input type="number" name="quantity" id="quantity" value="1" min="1" required>
-        </div>
-        <div class="toppings-select">
-            <label><b>Select Toppings (optional):</b></label>
-            <div class="toppings-list">
-                {% for topping in toppings %}
-                <div class="topping-item">
-                    <input type="checkbox" name="toppings" value="{{ topping.id }}" id="topping_{{ topping.id }}">
-                    <label  for="topping_{{ topping.id }}">{{ topping.name }} - <i class="fa-solid fa-indian-rupee-sign"></i> {{topping.price}}</label>
-                </div>
-                {% endfor %}
+    <main>
+        <h1 class="box-heading">Add Pizza to Cart</h1>
+        <h4 class="pizza-name">Cart Item: {{ menuitem.pizza_name }}</h4>
+        <form method="post" id="add-to-cart-form">
+            {% csrf_token %}
+
+            <div class="quantity-select">
+                <label for="quantity"><b>Quantity:</b></label>
+                <input type="number" name="quantity" id="quantity" value="1" min="1" required>
             </div>
-        </div>
-        <div class="form-actions">
-            <button type="submit" class="btn btn-danger">Add to Cart</button>
-        </div>
-    </form>
-</main>
+            <div class="toppings-select">
+                <label><b>Select Toppings (optional):</b></label>
+                <div class="toppings-list">
+                    {% for topping in toppings %}
+                    <div class="topping-item">
+                        <input type="checkbox" name="toppings" value="{{ topping.id }}" id="topping_{{ topping.id }}">
+                        <label for="topping_{{ topping.id }}" class="topping-label">
+                            <span class="topping-name">{{ topping.name }}</span>
+                            <span class="topping-price">
+                                <i class="fa-solid fa-indian-rupee-sign"></i> {{ topping.price }}
+                            </span>
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">Add to Cart</button>
+            </div>
+        </form>
+    </main>
 
 {% endblock %}
 
-
+    

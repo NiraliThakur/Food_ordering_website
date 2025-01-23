@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Food_ordering_app'
+    'Food_ordering_app',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +121,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+MEDIA_URL = '/media/'  
+MEDIA_ROOT = BASE_DIR / 'media' 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -128,6 +131,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-# API_KEY = "test_1d1892f58039d35b1defc81b11e"
-# AUTH_TOKEN = "test_b49b12ddce92055eef455b9a673"
-# SALT = "a669d88b6604426e94ceedf969c0349b"

@@ -1,10 +1,7 @@
 {% extends "index.html" %}
 
-
 {% block start %}
-
 <main>
-    
     <h1 class="box-heading">Checkout</h1>
     <div class="checkout-container">
         <h2 class="heading-h2">Order Summary</h2>
@@ -28,7 +25,7 @@
                                     <span class="topping">{{ topping.name }} (<i class="fa-solid fa-indian-rupee-sign"></i> {{ topping.price }})</span>
                                 {% endfor %}
                             {% else %}
-                                No toppings
+                                None
                             {% endif %}
                         </div>
                     </td>
@@ -40,21 +37,23 @@
                 {% endfor %}
             </tbody>
         </table>
+
         <div class="order-total">
-            <p><strong>Total: <i class="fa-solid fa-indian-rupee-sign"></i> {{ total_price }}</strong></p>
+            <h5><strong>Total: <i class="fa-solid fa-indian-rupee-sign"></i> {{ total_price }}</strong></h5>
         </div>
-        <form action="{% url 'Food_ordering_app:checkout' %}" method="POST">
-        {% csrf_token %}
-        <form method="POST">
+
+        <form action="{% url 'Food_ordering_app:checkout' %}" method="POST" class="shipping-form">
             {% csrf_token %}
             <h2 class="heading-h2">Shipping Information</h2>
-            {{ shipping_form.as_p }}
+            <div class="form-group">
+                {{ shipping_form.as_p }}
+            </div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-danger">Place Order</button>
             </div>
         </form>
     </div>
 </main>
-{% endblock %}
 
+{% endblock %}
 

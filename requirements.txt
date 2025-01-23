@@ -19,3 +19,4 @@ tzdata==2023.4
 urllib3==2.2.1
 uvicorn==0.34.0
 virtualenv==20.24.7
+whitenoise==6.8.2

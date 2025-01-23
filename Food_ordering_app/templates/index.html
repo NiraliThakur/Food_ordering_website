@@ -28,8 +28,12 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'Food_ordering_app:index' %}">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'Food_ordering_app:menu' %}">Menu</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'Food_ordering_app:cart' %}">Cart</a></li>
+
+                {% if request.path == '/' or request.path == '/menu/' %}
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                {% endif %}
+
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}"><i class="fa-solid fa-right-from-bracket"></i></a></li>
                 {% else %}
